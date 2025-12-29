@@ -5,6 +5,9 @@ use CodeIgniter\Router\RouteCollection;
 /**
  * @var RouteCollection $routes
  */
-$routes->get('/', 'Coba::index');
-$routes->get('coba/(:any)/(:num)', 'Coba::contact/$1/$2');
 $routes->get('/user', 'Admin\User::index');
+$routes->get('/user', 'Admin\User::index');
+$routes->get('/', 'Pages::index');
+$routes->get('/about', 'Pages::about');
+$routes->get('/contact', 'Pages::contact');
+
