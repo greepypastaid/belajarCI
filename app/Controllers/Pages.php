@@ -9,9 +9,7 @@ class Pages extends BaseController
         $data = [
             'title' => 'Home | WPU'
         ];
-        echo view("layouts/header", $data);
-        echo view("pages/home");
-        echo view("layouts/footer");
+        return view('pages/home', $data);
     }
 
     public function about()
@@ -19,9 +17,7 @@ class Pages extends BaseController
         $data = [
             'title' => 'About Me'
         ];
-        echo view("layouts/header", $data);
-        echo view("pages/about");
-        echo view("layouts/footer");
+        return view('pages/about', $data);
     }
 
     public function contact()
@@ -42,8 +38,6 @@ class Pages extends BaseController
             ]
         ];
 
-        echo view("layouts/header", $data);
-        echo view("pages/contact", $data);
-        echo view("layouts/footer");
+        return view('pages/contact', $data);
     }
 }
