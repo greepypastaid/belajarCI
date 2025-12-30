@@ -17,8 +17,13 @@
                             <p class="card-text"> <b>Penulis: </b><?= $komik['penulis']; ?></p>
                             <p class="card-text"><small class="text-body-secondary"><b>Penerbit:
                                     </b><?= $komik['penerbit']; ?></small></p>
-                            <a href="#" class="btn btn-warning">Edit</a>
-                            <a href="#" class="btn btn-danger">Delete</a>
+                            <a href="/komik/edit/<?= $komik['slug']; ?>" class="btn btn-warning">Edit</a>
+                            <form action="/komik/delete/<?= $komik['id']; ?>" method="post" class="d-inline"
+                                onsubmit="return confirm('Yakin ingin menghapus data ini?');">
+                                <?= csrf_field(); ?>
+                                <input type="hidden" value="DELETE">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
                             <br class="my-4">
                             <a href="/komik" class="btn btn-primary">Kembali ke Daftar</a>
                         </div>

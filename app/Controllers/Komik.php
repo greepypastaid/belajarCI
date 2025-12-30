@@ -68,7 +68,48 @@ class Komik extends BaseController
         session()->setFlashdata('pesan', 'Data berhasil ditambahkan.');
 
         return redirect()->to('/komik');
-        
     }
 
+    public function delete($id) {
+        $this->komikModel->delete($id);
+        session()->setFlashdata('pesan', 'Data berhasil dihapus.');
+        return redirect()->to('/komik');
+    }
+
+    public function edit($slug) {
+        $data = [
+            'title' => 'Form Edit Data Komik',
+            'validation' => session('validation') ?? \Config\Services::validation(),
+            'komik' => $this->komikModel->getKomik($slug)
+        ];
+
+        return view('komik/edit', $data);
+    }
+
+    public function update ($id) {
+        if(!$this->validate(
+            [
+                'judul' => 'required|is_unique[komik.judul]',
+                'penulis' => 'required|',
+                'penerbit' => 'required',
+                'sampul' => 'required',
+            ]
+        ))
+        {
+            $validation = \Config\Services::validation();
+            return redirect()->to('/komik/create')->withInput()->with('validation', $validation);
+        }
+        
+        $this->komikModel->save([
+            'id' => $id,
+            'judul' => $this->request->getVar('judul'),
+            'slug' => url_title($this->request->getVar('judul'), '-', true),
+            'penulis' => $this->request->getVar('penulis'),
+            'penerbit' => $this->request->getVar('penerbit'),
+            'sampul' => $this->request->getVar('sampul')
+        ]);
+        session()->setFlashdata('pesan', 'Data berhasil diubah.');
+
+        return redirect()->to('/komik');
+    }
 }
