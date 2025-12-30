@@ -12,3 +12,6 @@ $routes->get('/about', 'Pages::about');
 $routes->get('/contact', 'Pages::contact');
 $routes->get('/komik', 'komik::index');
 
+// pakai segment biar nanti bisa pakai link dinamis untuk detail
+$routes->get('komik/(:segment)','komik::detail/$1');
+
